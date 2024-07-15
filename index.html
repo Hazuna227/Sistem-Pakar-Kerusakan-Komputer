@@ -199,44 +199,21 @@ th {
     }
 }
 
-@media (max-width: 768px) {
-    .sidebar {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200px;
-        height: 100%;
-        background-color: #2d98da;
-        color: white;
-        padding: 20px;
-        z-index: 1000;
-        transition: transform 0.3s ease-in-out;
+@media (max-width: 480px) {
+    .data-summary .summary-box {
+        padding: 10px;
     }
-
-    .sidebar.open {
-        transform: translateX(0);
+    #checkboxes {
+        grid-template-columns: 1fr;
     }
-
-    .content {
-        margin-left: 200px;
-        transition: margin-left 0.3s ease-in-out;
-    }
-
-    .content.open {
-        margin-left: 0;
-    }
-
-    .content,
-    .sidebar {
-        overflow-x: hidden;
+    #checkboxes label {
+        padding: 5px;
     }
 }
 </style>
 <body>
-    <div class="sidebar" id="sidebar">
+    <div class="sidebar">
         <h2>Sistem Pakar Troubleshooting Perangkat Komputer</h2>
-        <button id="toggleSidebar">☰ Menu</button>
         <ul>
             <li><a href="#" onclick="toggleSection('home')">Beranda</a></li>
             <li><a href="#" onclick="toggleSection('symptoms')">Lihat Data Gejala</a></li>
