@@ -187,14 +187,14 @@ th {
     body {
         flex-direction: column;
     }
-
     .sidebar {
         width: 100%;
         height: auto;
+        order: 1;
     }
-
     .content {
         width: 100%;
+        order: 2;
     }
 }
 
@@ -205,12 +205,10 @@ th {
     #checkboxes {
         grid-template-columns: 1fr;
     }
-
     #checkboxes label {
         padding: 5px;
     }
 }
-
 </style>
 <body>
     <div class="sidebar">
