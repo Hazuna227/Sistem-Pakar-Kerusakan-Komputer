@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert System - Computer Damage Diagnosis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+/* CSS styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    height: 100vh;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 20px;
+    width: calc(100% - 200px);
+}
+
+.section {
+    display: none;
+}
+
+.section.show {
+    display: block;
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.data-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.data-summary .summary-box {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.data-summary .summary-box h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333333;
+}
+
+#checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+#checkboxes label {
+    display: block;
+    padding: 5px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#checkboxes label:hover {
+    background-color: #f0f0f0;
+}
+
+/* CSS for Diagnosis Result */
+#resultContainer {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+#resultContainer h2 {
+    text-align: center;
+    color: #333333;
+}
+
+#resultContainer p {
+    color: #333333;
+    font-size: 1em;
+}
+
+/* CSS for About Section */
+.about-box {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.about-box h2 {
+    text-align: center;
+    color: #333333;
+}
+
+.about-box p, .about-box ul {
+    color: #333333;
+    font-size: 1em;
+}
+
+.about-box ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-box ul li {
+    margin-bottom: 5px;
+}
+
+.about-box ul li::before {
+    content: "\2022";
+    color: black;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+</style>
+<body>
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#" onclick="toggleSection('home')">Beranda</a></li>
+            <li><a href="#" onclick="toggleSection('symptoms')">Lihat Data Gejala</a></li>
+            <li><a href="#" onclick="toggleSection('diagnoses')">Lihat Data Kerusakan</a></li>
+            <li><a href="#" onclick="toggleSection('rules')">Lihat Aturan Base</a></li>
+            <li><a href="#" onclick="toggleSection('checkSymptoms')">Pengecekan Gejala</a></li>
+            <li><a href="#" onclick="toggleSection('about')">Tentang</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <div id="home" class="section">
+            <h1>Selamat datang di Sistem Pakar</h1>
+            <div class="data-summary" id="dataSummary">
+                <!-- Data summary will be displayed here -->
+            </div>
+        </div>
+        <div id="symptoms" class="section">
+            <h2>Data Gejala</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Kode Gejala</th>
+                        <th>Gejala</th>
+                    </tr>
+                </thead>
+                <tbody id="symptomsTableBody">
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="diagnoses" class="section">
+            <h2>Data Kerusakan</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Kode Kerusakan</th>
+                        <th>Kerusakan</th>
+                    </tr>
+                </thead>
+                <tbody id="diagnosesTableBody">
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="rules" class="section">
+            <h2>Aturan Base</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Aturan</th>
+                    </tr>
+                </thead>
+                <tbody id="rulesTableBody">
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="checkSymptoms" class="section">
+            <h2>Pengecekan Gejala</h2>
+            <form id="symptomForm">
+                <label for="selectedSymptoms">Pilih Gejala:</label><br>
+                <div id="checkboxes"></div><br>
+                <button type="submit">Cek Kerusakan</button>
+            </form>
+            <div id="resultContainer" style="margin-top: 20px;"></div>
+        </div>
+
+        <!-- Tentang Section -->
+        <div id="about" class="section">
+            <div class="about-box">
+                <h2>Tentang</h2>
+                <p>Tujuan dari website ini adalah menyediakan sumber informasi yang komprehensif dan mudah diakses tentang berbagai jenis kerusakan komputer beserta solusinya.</p>
+                <h3>Nama Kelompok :</h3>
+                <ul>
+                    <li>Monika Yuyen (220509157)</li>
+                    <li>Novel Daviria Lenfi (220509158)</li>
+                    <li>Selfany Nanda Ismaya (220509162)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="expert_system.js"></script>
+</body>
+</html>
