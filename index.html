@@ -22,7 +22,7 @@ body {
     background-color: #2d98da;
     color: white;
     padding: 20px;
-    height: 100vh;
+    height: 200vh;
 }
 
 .sidebar h2 {
@@ -186,38 +186,57 @@ th {
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {
     body {
-        flex-direction: column; /* Tetapkan flex-direction menjadi column untuk layout default */
+        flex-direction: column;
     }
     .sidebar {
-        width: 100%; /* Sidebar mengambil lebar penuh dari layar */
+        width: 100%;
         height: auto;
-        order: 1; /* Urutan sidebar diubah untuk menempatkannya di atas konten */
+        order: 1;
     }
     .content {
-        width: 100%; /* Konten juga mengambil lebar penuh */
-        order: 2; /* Urutan konten diubah untuk menempatkannya setelah sidebar */
+        width: 100%;
+        order: 2;
     }
 
     .sidebar ul {
-        display: flex; /* Mengubah daftar ul menjadi flex untuk tata letak horizontal */
-        flex-direction: row; /* Menu navigasi diatur secara horizontal */
-        justify-content: space-around; /* Mengatur jarak antar item di sekitar */
-        padding: 0;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        justify-content: flex-start;
     }
 
     .sidebar ul li {
-        margin-bottom: 0; /* Menghilangkan margin bawah pada item daftar */
+        display: inline-block;
+        margin-right: 10px;
     }
 
     .sidebar ul li a {
-        padding: 10px; /* Padding untuk setiap item navigasi */
+        padding: 10px;
+        white-space: nowrap;
+    }
+
+    /* Hide scrollbar for Webkit browsers */
+    .sidebar ul::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .sidebar ul {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
     }
 }
 
 @media (max-width: 480px) {
-    /* Penyesuaian untuk lebar layar yang lebih kecil jika diperlukan */
-    .sidebar ul li a {
-        padding: 8px; /* Mengurangi padding untuk layar yang lebih kecil */
+    .data-summary .summary-box {
+        padding: 10px;
+    }
+    #checkboxes {
+        grid-template-columns: 1fr;
+    }
+    #checkboxes label {
+        padding: 5px;
     }
 }
 </style>
