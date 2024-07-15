@@ -36,6 +36,15 @@ const rules = [
     { gejala: ['G08'], kerusakan: ['K06'] }
 ];
 
+// Ambil elemen-elemen yang diperlukan
+const sidebar = document.getElementById('sidebar');
+const toggleButton = document.getElementById('toggleSidebar');
+
+// Tambahkan event listener untuk toggle button
+toggleButton.addEventListener('click', function() {
+    sidebar.classList.toggle('open');
+});
+
 // Function to toggle visibility of content sections
 function toggleSection(sectionId) {
     const sections = document.querySelectorAll('.section');
