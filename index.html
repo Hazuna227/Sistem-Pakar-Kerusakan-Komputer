@@ -182,6 +182,34 @@ th {
     width: 1em;
     margin-left: -1em;
 }
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+
+    .content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .data-summary .summary-box {
+        padding: 10px;
+    }
+    #checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    #checkboxes label {
+        padding: 5px;
+    }
+}
 
 </style>
 <body>
